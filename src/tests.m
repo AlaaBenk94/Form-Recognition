@@ -9,7 +9,7 @@ for im = 1:numel(img_db_list)
     img_db{im} = logical(imread(img_db_list{im}));
     label_db{im} = get_label(img_db_list{im});
     disp(label_db{im}); 
-    [fd_db{im},~,~,~] = compute_fd1(img_db{im});
+    [fd_db{im},~,~,~] = compute_fd2(img_db{im});
     % affichage de pourcentage de traitement.
     clc;fprintf("%d%% Terminé\n",round((im/numel(img_db_list))*100));
 end
@@ -30,7 +30,7 @@ for im = 1:numel(img_list)
     
     % calcul du descripteur de Fourier de l'image
     img = logical(imread(img_list{im}));
-    [fd,r,m,poly] = compute_fd1(img);
+    [fd,r,m,poly] = compute_fd2(img);
        
     % calcul et tri des scores de distance aux descripteurs de la base
     for i = 1:length(fd_db)

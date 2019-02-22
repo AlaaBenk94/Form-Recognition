@@ -1,13 +1,13 @@
-function [fd,r,m,poly] = compute_fd1(img)
+function [fd,r,m,poly] = compute_fd2(img)
 %disp("Compute FD");
-N = 32; % à modifier !!!
+N = 128; % à modifier !!!
 M = N; % à modifier !!!
 h = size(img,1);
 w = size(img,2);
 
 [mi, mj] = barycenter(img); % calcul de barycentre
 m = [mi, mj];
-t = linspace(0,2*pi,N);
+t = linspace(0,2*pi,N/2);
 
 k = 1;
 poly = zeros(N, 2);
@@ -20,16 +20,28 @@ for x = 1:N
     poly(k,2) = int32(j);
     a = 1;
     p = 1;
+    si = 0; sj = 0; cnt = 0;
     %fprintf("i=%i, j=%i, h=%d, w=%d, img(i,j)=%d\n",i,j,h,w,img(i,j));
+    frst = true;
     while (i<=h && i>0) && (j<=w && j>0)    
+        %fprintf("i=%f, j=%f, h=%d, w=%d\n",i,j,h,w);
+        if img(i,j)==1
+            if frst
+                frst = false;
+                poly(k+(N/2),1) = 
+                poly(k+(N/2),2) = 
+            else
+                poly(k+(N/2),1) = int32(i);
+                poly(k+(N/2),2) = int32(i);
+            end
+        end
         j = mj + a*p*cos(t(1,x));
         i = mi + a*p*sin(t(1,x));
-        fprintf("i=%i, j=%i, h=%d, w=%d, img(i,j)=%d\n",i,j,h,w,img(i,j));
-        if img(i,j)==1
-            poly(k,1) = int32(i);
-            poly(k,2) = int32(j);
-        end
         a=a+1;
+    end
+    if cnt > 0
+        poly(k,1) = int32(si/cnt);
+        poly(k,2) = int32(sj/cnt);
     end
     k = k+1;
 end
