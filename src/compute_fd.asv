@@ -1,7 +1,7 @@
 function [fd,r,m,poly] = compute_fd(img)
-disp("Compute FD");
-N = 150; % à modifier !!!
-M = 512; % à modifier !!!
+%disp("Compute FD");
+N = 64; % à modifier !!!
+M = N; % à modifier !!!
 h = size(img,1);
 w = size(img,2);
 
@@ -13,18 +13,16 @@ k = 1;
 poly = zeros(N, 2);
 
 for x = 1:N
-    disp("FOR Loop");
+    %disp("FOR Loop");
     i = mi;
     j = mj;
     a = 1;
     p = 1;
-    fprintf("i=%i, j=%i, h=%d, w=%d, img(i,j)=%d\n",i,j,h,w,img(i,j));
+    %fprintf("i=%i, j=%i, h=%d, w=%d, img(i,j)=%d\n",i,j,h,w,img(i,j));
     while (i<=h && i>0) && (j<=w && j>0) && (img(i,j)==1)    
         j = mj + a*p*cos(t(1,x));
         i = mi + a*p*sin(t(1,x));
-        fprintf("WHILE Values k=%d, i=%d, j=%d\n",k, );
-        disp([k, int32(i),int32(j)]);
-        disp(size(img));
+        %fprintf("WHILE Values k=%d, i=%d, j=%d\n",k, int32(i),int32(j));
         poly(k,1) = int32(i);
         poly(k,2) = int32(j);
         a=a+1;
@@ -32,6 +30,6 @@ for x = 1:N
     k = k+1;
 end
 
-r = ; % vecteur descripteur !!!
-fd = rand(1,M); % à modifier !!!
+r = ((poly(:,1) - mean(poly(:,1))).^2 + (poly(:,2) - mean(poly(:,2))).^2).^(0.5); % vecteur descripteur !!!
+fd = fft(r,M);
 end

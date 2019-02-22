@@ -86,6 +86,14 @@ Représentation de Données Visuelles
 
 \begin_layout Subtitle
 Utilisation d’un descripteur de Fourier pour la reconnaissance de formes
+\end_layout
+
+\begin_layout Author
+Alaa Eddine BENKARRAD
+\begin_inset Newline newline
+\end_inset
+
+Walid HAFIANE
 \begin_inset ERT
 status open
 
@@ -101,14 +109,6 @@ date{}
 
 \end_layout
 
-\begin_layout Author
-Alaa Eddine BENKARRAD
-\begin_inset Newline newline
-\end_inset
-
-Walid HAFIANE
-\end_layout
-
 \begin_layout Section
 Introdution
 \end_layout
@@ -119,6 +119,10 @@ Méthode basique
 
 \begin_layout Subsection
 Implémentation de la méthode
+\end_layout
+
+\begin_layout Subsection
+Réglage des parametres 
 \end_layout
 
 \begin_layout Subsection

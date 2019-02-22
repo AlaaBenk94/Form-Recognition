@@ -1,7 +1,7 @@
 function [fd,r,m,poly] = compute_fd(img)
 %disp("Compute FD");
-N = 512; % à modifier !!!
-M = 100; % à modifier !!!
+N = 128; % à modifier !!!
+M = 4; % à modifier !!!
 h = size(img,1);
 w = size(img,2);
 
