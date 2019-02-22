@@ -113,8 +113,16 @@ date{}
 Introdution
 \end_layout
 
+\begin_layout Standard
+une petite intro du projet, ce qui est demandé et comment on vas y répondre.
+\end_layout
+
 \begin_layout Section
 Méthode basique
+\end_layout
+
+\begin_layout Standard
+une phrase ou deux sur la methode décrit dans l'énoncé
 \end_layout
 
 \begin_layout Subsection

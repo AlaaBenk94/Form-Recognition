@@ -529,7 +529,59 @@ Première amélioration
 \end_layout
 
 \begin_layout Standard
-je detail la resolution de probleme de barycentre noir
+je detail la resolution de probleme de barycentre noir.
+\end_layout
+
+\begin_layout Standard
+compute_fd1 
+\end_layout
+
+\begin_layout Standard
+32 -----> 0.6543
+\end_layout
+
+\begin_layout Standard
+64 -----> 0.6514 
+\end_layout
+
+\begin_layout Standard
+128 -----> 0.6571 
+\end_layout
+
+\begin_layout Standard
+256 -----> 0.6571 
+\end_layout
+
+\begin_layout Standard
+512 -----> 0.6571 
+\end_layout
+
+\begin_layout Standard
+1024 -----> 0.6571
+\end_layout
+
+\begin_layout Standard
+the bat is good example to compare 
+\end_layout
+
+\begin_layout Standard
+the caravane also 
+\end_layout
+
+\begin_layout Standard
+el hodhwa aussi 
+\end_layout
+
+\begin_layout Standard
+lizard also 
+\end_layout
+
+\begin_layout Standard
+the pocket watch also
+\end_layout
+
+\begin_layout Standard
+the hand watch also
 \end_layout
 
 \begin_layout Subsection
