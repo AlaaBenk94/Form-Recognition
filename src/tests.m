@@ -1,6 +1,6 @@
 function [recall, precision] = my_tests()
 % calcul des descripteurs de Fourier de la base de données
-img_db_path = './db/';
+img_db_path = strcat('.',filesep,'db',filesep);
 img_db_list = glob([img_db_path, '*.gif']);
 img_db = cell(1);
 label_db = cell(1);
@@ -8,16 +8,14 @@ fd_db = cell(1);
 for im = 1:numel(img_db_list)
     img_db{im} = logical(imread(img_db_list{im}));
     label_db{im} = get_label(img_db_list{im});
-    disp(label_db{im}); 
     [fd_db{im},~,~,~] = compute_fd2(img_db{im});
     % affichage de pourcentage de traitement.
     clc;fprintf("%d%% Terminé\n",round((im/numel(img_db_list))*100));
 end
 
 % importation des images de requête dans une liste
-img_path = './dbq/';
+img_path = strcat('.',filesep,'dbq',filesep);
 img_list = glob([img_path, '*.gif']);
-%t=tic()
 precision = 0;
 
 % pour chaque image de la liste...
@@ -26,7 +24,7 @@ for im = 1:numel(img_list)
     % initialisation des parametres de calcul de precision
     accuracy = 0;
     label = get_label(img_list{im});
-    label = erase(label, '.\dbq\');
+    label = strrep(label,img_path,'');
     
     % calcul du descripteur de Fourier de l'image
     img = logical(imread(img_list{im}));
@@ -56,7 +54,7 @@ for im = 1:numel(img_list)
         
         % calculer le nombre de "vraie ressemblance"
         %fprintf("im = %d, %s == %s ?\n",im, label, erase(label_db{I(i)}, '.\db\'));
-        if strcmp(label, erase(label_db{I(i)}, '.\db\'))
+        if strcmp(label, strrep(label_db{I(i)}, img_db_path,''))
             accuracy = accuracy+1;
         end    
     end

@@ -3,17 +3,14 @@ clc;
 img_db_path = './db/';
 img_db_list = glob([img_db_path, '*.gif']);
 im = randi(numel(img_db_list));
-img = logical(imread(img_db_list{im}));
-[fd, r, m, shape] = compute_fd(img);
+impath = './db/bat-16.gif';
 
-mi = m(1);
-mj = m(2);
+img = logical(imread(impath));
+[fd, r, m, shape] = compute_fd1(img);
 
-out = single(img);
-out = insertMarker(out, [mj, mi], 'color','red'); 
-for i=1:size(shape,1)
-   out = insertMarker(out, [shape(i,2), shape(i,1)]); 
-end
-figure; imshow(out);
+figure;
+subplot(1,2,1);
+imshow(img);
+subplot(1,2,2);
+plot(r);
 
-figure; plot([1:size(r,1)], r);

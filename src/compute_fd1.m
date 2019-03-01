@@ -36,4 +36,5 @@ end
 
 r = ((poly(:,1) - mean(poly(:,1))).^2 + (poly(:,2) - mean(poly(:,2))).^2).^(0.5); % vecteur descripteur !!!
 fd = fft(r,M);
+disp(fd);
 end
