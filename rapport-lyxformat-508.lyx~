@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -21,8 +21,6 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
-\use_microtype false
-\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -53,7 +51,6 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
-\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -66,10 +63,7 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\is_math_indent 0
-\math_numbering_side default
-\quotes_style swiss
-\dynamic_quotes 0
+\quotes_language french
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -120,12 +114,7 @@ Introdution
 \end_layout
 
 \begin_layout Standard
-En vue de répondre aux questions de l'énnoncé donné, on a décidé d'organiser
- notre rapport comme suit : Premierement, nous expliquerons et analyserons
- la methodes de base décrite dans l'énnoncé.
- Ensuite, nous passerons à l'expliquation des améliorations éffectuées.
- Finalement, nous détaillerons l'approche suivi pour calibrer les paramtres
- de l'algorithme.
+une petite intro du projet, ce qui est demandé et comment on vas y répondre.
 \end_layout
 
 \begin_layout Section
@@ -136,77 +125,25 @@ Méthode basique
 une phrase ou deux sur la methode décrit dans l'énoncé
 \end_layout
 
-\begin_layout Section
-Amélioration
-\end_layout
-
-\begin_layout Section
-Calibrage des parametres M et N
+\begin_layout Subsection
+Implémentation de la méthode
 \end_layout
 
 \begin_layout Standard
-L'obtention d'un bon modèle ne dépend pas seulement de la méthode choisie,
- mais aussi des bons paramètres.
- Par la suite, nous ajustons les paramètres M et N.
-\end_layout
-
-\begin_layout Standard
-Due à l'absence d'une méthode exacte pour le réglage de ces paramètres qui
- sont dépendants du problème donné, on fait recours a une approche dite
- 
-\begin_inset Quotes cld
-\end_inset
-
-essai et erreur
-\begin_inset Quotes crd
-\end_inset
-
- ou encore, en anglais, 
-\begin_inset Quotes cld
-\end_inset
-
-trial and error
-\begin_inset Quotes crd
-\end_inset
-
- .
- Cette dernière consiste à fixer les paramètres et varier un seul paramètre
- a la fois.
-\end_layout
-
-\begin_layout Standard
-Avant d'entamer le réglage des parametres, on a défini une mesure d'évaluation
- des performances.
- Les valeurs de cette derniere sont utilisées pour calibrer les parametres.
- Elle est definie comme suit :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-mesure
-\]
-
-\end_inset
-
-
+Je parle de la methode en generale puis je parle des formules de barrycentre
+ et de contour et de vecteur caracteristique, je termine avec la formule
+ qui calcul la precision.
 \end_layout
 
 \begin_layout Subsection
-Paramètre N
+Réglage des parametres M et N
 \end_layout
 
 \begin_layout Standard
-On a fixé M = N et fait varier N sur l'ensemble {8,16,32,64,128,256,512,1024,204
-8,4096}.
- Les resultats sont illustrée sur le tableau et la figure suivante :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -228,7 +165,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-N
+ N
 \end_layout
 
 \end_inset
@@ -415,20 +352,6 @@ Précision %
 \end_layout
 
 \begin_layout Plain Layout
-\align center
-
-\emph on
-\begin_inset Graphics
-	filename C:/Users/king/Desktop/Presensation BENKARRAD HAFIANE CHERIFI/LogoUl_white.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -440,32 +363,20 @@ Reglage de valeur de N
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-On peut remarquer que pour les deux methodes, jusqu'a N=512 la mesure de
- performance est croissante et elle se stabilise aprés cette valeurs.
- On conclue donc que la valeur 512 est une valeur raisonnable pour N.
-\end_layout
-
-\begin_layout Subsection
-Paramètre M
-\end_layout
-
-\begin_layout Standard
-Pour ce test, on a fixé la valeur de N=512 et fait varier M sur l'ensemble
- {8,16,32,64,128,256,512}.
- Les resultats sont présenté par le tableau et la figure suivants.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -579,20 +490,6 @@ Précision %
 \end_layout
 
 \begin_layout Plain Layout
-\align center
-
-\emph on
-\begin_inset Graphics
-	filename C:/Users/king/Desktop/Presensation BENKARRAD HAFIANE CHERIFI/LogoUl_white.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -609,11 +506,22 @@ Reglage de valeur de M
 
 \end_layout
 
+\begin_layout Subsection
+Limites et incovinients
+\end_layout
+
 \begin_layout Standard
-D'aprés le tableau, on remarque que la précision atteint sa valeur maximale
- en M = 64, M = 32.
- Ensuite, elle est stable juste aprés cette derniere.
- Ce qui nous mène a fixer la valeur de M à 32 et 64.
+je parle du probleme de barrycentre noir, le probleme de details de contour
+ ...
+ 
+\end_layout
+
+\begin_layout Section
+Améliorations
+\end_layout
+
+\begin_layout Standard
+J'introduit les amélioration effectué
 \end_layout
 
 \begin_layout Subsection
