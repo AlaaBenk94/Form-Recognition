@@ -1,6 +1,6 @@
 function [fd,r,m,poly] = compute_fd1(img)
 %disp("Compute FD");
-N = 128; % à modifier !!!
+N = 4096; % à modifier !!!
 M = N; % à modifier !!!
 h = size(img,1);
 w = size(img,2);
@@ -35,6 +35,6 @@ for x = 1:N
 end
 
 r = ((poly(:,1) - mean(poly(:,1))).^2 + (poly(:,2) - mean(poly(:,2))).^2).^(0.5); % vecteur descripteur !!!
-fd = fft(r,M);
-disp(fd);
+ftr = fft(r);
+fd = abs(ftr(1:M))/abs(ftr(1));
 end

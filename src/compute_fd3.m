@@ -35,5 +35,6 @@ end
 % poly = [i, j];
 
 r = ((poly(:,1) - mean(poly(:,1))).^2 + (poly(:,2) - mean(poly(:,2))).^2).^(0.5);
-fd = fft(r,M);
+ftr = fft(r);
+fd = abs(ftr(1:M))/abs(ftr(1));
 end
