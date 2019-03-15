@@ -129,15 +129,342 @@ En vue de répondre aux questions de l'énnoncé donné, on a décidé d'organis
 \end_layout
 
 \begin_layout Section
-Méthode basique
+Méthode de base
 \end_layout
 
 \begin_layout Standard
-une phrase ou deux sur la methode décrit dans l'énoncé
+La méthode basique est décrite dans l'énnoncé comme suit :
+\end_layout
+
+\begin_layout Enumerate
+Calculer le barycentre 
+\begin_inset Formula $m$
+\end_inset
+
+ des pixels blancs
+\end_layout
+
+\begin_layout Enumerate
+calculer l’intersection 
+\begin_inset Formula $p(t)$
+\end_inset
+
+ entre le contour de l’objet et le rayon partant de 
+\begin_inset Formula $m$
+\end_inset
+
+ par la méthode suivante :
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+partir du barycentre 
+\begin_inset Formula $m$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+avancer le long du rayon d’angle 
+\begin_inset Formula $t$
+\end_inset
+
+ tant que le pixel est blanc
+\end_layout
+
+\begin_layout Enumerate
+Le dernier pixel blanc rencontré le long du rayon correspond à 
+\begin_inset Formula $p(t)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Soit 
+\begin_inset Formula $r(t)$
+\end_inset
+
+, profil de la forme, la distance euclidienne entre 
+\begin_inset Formula $m$
+\end_inset
+
+ et 
+\begin_inset Formula $p(t)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Cette méthode nous a permi d'obtenir une précision de 65.43% selon ma mésure
+ définie en ci-aprés (section 4).
 \end_layout
 
 \begin_layout Section
 Amélioration
+\end_layout
+
+\begin_layout Standard
+La methode de base est simple à implanter et atteint de bons resultats.
+ Cependent, elle a quelques problemes dont celui le plus remarquable est
+ le cas où le barycentre 
+\begin_inset Formula $m$
+\end_inset
+
+ est pixel noir (Figure suivante).
+ Dans ce cas, l'algorithme ne rentre pas dans la boucle et passe aux points
+ suivants qui vont avoir le même résultat, le point de barycentre 
+\begin_inset Formula $m$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename dog.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename horsehoe.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Problème du barycentre noir.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Afin de résoudre le problème de barycentre noir, nous proposons une modification
+ au niveau de l'étape 2.b de l'algorithme de base.
+ Donc au lieu d'avancer le long du rayon d’angle 
+\begin_inset Formula $t$
+\end_inset
+
+ tant que le pixel est blanc, on doit parcourir tous les pixels du l'angle
+ 
+\begin_inset Formula $t$
+\end_inset
+
+, de barycentre jusqu'aux extremitées de l'image et prendre le dernier point
+ blanc rencontré.
+ Cela a permi de donner les résultats presents sur la figure ci-dessous
+ avec une précision de 80.29%.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename dog1.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename horsehoe1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résolution du problème de barycentre noir.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nous avons esseyé d'autres méthodes qui ont apporter des améliorations à
+ la méthode de base, mais pas à la premiere amélioration, comme :
+\end_layout
+
+\begin_layout Itemize
+Prendre la moyenne des points du rayon d'angle 
+\begin_inset Formula $t$
+\end_inset
+
+ pour chaque angle (précision : 76.14%).
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename dog3.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Inclure pour chaque rayon d'angle 
+\begin_inset Formula $t$
+\end_inset
+
+, le premier et le dernier points blancs (précision : 72.43%).
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename horsehoe2.png
+	scale 40
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -184,12 +511,48 @@ Avant d'entamer le réglage des parametres, on a défini une mesure d'évaluatio
 \begin_layout Standard
 \begin_inset Formula 
 \[
-mesure
+précision=\frac{1}{ReqImg}\sum_{i}^{^{ReqImg}}(\frac{m_{i}}{top})
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+où :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ReqImg$
+\end_inset
+
+ est le nombre d'image requêtes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $i$
+\end_inset
+
+ le numéro d'image requête
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $m_{i}$
+\end_inset
+
+le nombre d'images de la base qui ressemblent a l'image requête 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $top$
+\end_inset
+
+ est le nombre d'images, ordonnées par leurs score, consédérées.
 \end_layout
 
 \begin_layout Subsection
@@ -199,20 +562,21 @@ Paramètre N
 \begin_layout Standard
 On a fixé M = N et fait varier N sur l'ensemble {8,16,32,64,128,256,512,1024,204
 8,4096}.
- Les resultats sont illustrée sur le tableau et la figure suivante :
+ Les resultats sont illustrée sur le tableau suivant.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="10">
+<lyxtabular version="3" rows="3" columns="11">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -228,16 +592,9 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-N
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
+Précision 
+\backslash
+ N
 \end_layout
 
 \end_inset
@@ -305,11 +662,130 @@ N
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 1024
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2048
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4096
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+méthode de base
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44.86
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+62.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
 \end_layout
 
 \end_inset
@@ -320,7 +796,7 @@ N
 \begin_inset Text
 
 \begin_layout Plain Layout
-Précision %
+amélioration
 \end_layout
 
 \end_inset
@@ -329,16 +805,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-41.14
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-57.14
+50.29
 \end_layout
 
 \end_inset
@@ -356,7 +823,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.71
+69.43
 \end_layout
 
 \end_inset
@@ -365,7 +832,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.14
+76.29
 \end_layout
 
 \end_inset
@@ -374,7 +841,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.43
+79.43
 \end_layout
 
 \end_inset
@@ -383,7 +850,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.14
+79.43
 \end_layout
 
 \end_inset
@@ -392,7 +859,25 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.14
+80.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80.00
 \end_layout
 
 \end_inset
@@ -401,7 +886,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.14
+80.29
 \end_layout
 
 \end_inset
@@ -415,24 +900,10 @@ Précision %
 \end_layout
 
 \begin_layout Plain Layout
-\align center
-
-\emph on
-\begin_inset Graphics
-	filename C:/Users/king/Desktop/Presensation BENKARRAD HAFIANE CHERIFI/LogoUl_white.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Reglage de valeur de N
+Réglage de valeur de N
 \end_layout
 
 \end_inset
@@ -458,20 +929,23 @@ Paramètre M
 \begin_layout Standard
 Pour ce test, on a fixé la valeur de N=512 et fait varier M sur l'ensemble
  {8,16,32,64,128,256,512}.
- Les resultats sont présenté par le tableau et la figure suivants.
+ Les resultats sont présenté par le tableau suivant.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="5">
+<lyxtabular version="3" rows="3" columns="8">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -482,16 +956,9 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-M
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
+Précision 
+\backslash
+ M
 \end_layout
 
 \end_inset
@@ -514,11 +981,121 @@ M
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+256
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+512
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+méthode de base
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64.57
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65.43
 \end_layout
 
 \end_inset
@@ -529,7 +1106,7 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-Précision %
+amélioration
 \end_layout
 
 \end_inset
@@ -538,7 +1115,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-42.57
+72.57
 \end_layout
 
 \end_inset
@@ -547,7 +1124,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-50.00
+79.43
 \end_layout
 
 \end_inset
@@ -556,7 +1133,34 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-57.43
+80.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80.29
 \end_layout
 
 \end_inset
@@ -565,7 +1169,7 @@ Précision %
 \begin_inset Text
 
 \begin_layout Plain Layout
-59.71
+80.29
 \end_layout
 
 \end_inset
@@ -579,24 +1183,10 @@ Précision %
 \end_layout
 
 \begin_layout Plain Layout
-\align center
-
-\emph on
-\begin_inset Graphics
-	filename C:/Users/king/Desktop/Presensation BENKARRAD HAFIANE CHERIFI/LogoUl_white.png
-	lyxscale 40
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Reglage de valeur de M
+Réglage de valeur de M
 \end_layout
 
 \end_inset
@@ -610,95 +1200,10 @@ Reglage de valeur de M
 \end_layout
 
 \begin_layout Standard
-D'aprés le tableau, on remarque que la précision atteint sa valeur maximale
- en M = 64, M = 32.
+En analysant les resultats du tableau, on remarque que la précision atteint
+ sa valeur maximale en M = 64, M = 32.
  Ensuite, elle est stable juste aprés cette derniere.
  Ce qui nous mène a fixer la valeur de M à 32 et 64.
-\end_layout
-
-\begin_layout Subsection
-Première amélioration
-\end_layout
-
-\begin_layout Standard
-je detail la resolution de probleme de barycentre noir.
-\end_layout
-
-\begin_layout Standard
-compute_fd1 
-\end_layout
-
-\begin_layout Standard
-32 -----> 0.6543
-\end_layout
-
-\begin_layout Standard
-64 -----> 0.6514 
-\end_layout
-
-\begin_layout Standard
-128 -----> 0.6571 
-\end_layout
-
-\begin_layout Standard
-256 -----> 0.6571 
-\end_layout
-
-\begin_layout Standard
-512 -----> 0.6571 
-\end_layout
-
-\begin_layout Standard
-1024 -----> 0.6571
-\end_layout
-
-\begin_layout Standard
-the bat is good example to compare 
-\end_layout
-
-\begin_layout Standard
-the caravane also 
-\end_layout
-
-\begin_layout Standard
-el hodhwa aussi 
-\end_layout
-
-\begin_layout Standard
-lizard also 
-\end_layout
-
-\begin_layout Standard
-the pocket watch also
-\end_layout
-
-\begin_layout Standard
-the hand watch also
-\end_layout
-
-\begin_layout Standard
-the cow also
-\end_layout
-
-\begin_layout Subsection
-Dauxième amélioration
-\end_layout
-
-\begin_layout Standard
-La methode de deux points.
- weslet 67.14%
-\end_layout
-
-\begin_layout Standard
-el hodhwa est un bon exemple 
-\end_layout
-
-\begin_layout Standard
-a dooda aussi.
-\end_layout
-
-\begin_layout Subsection
-Troisième amélioration
 \end_layout
 
 \begin_layout Section
@@ -706,7 +1211,12 @@ Conclusion
 \end_layout
 
 \begin_layout Standard
-j'ecrit une breve conclusion sur les methodes et les améliorations présenté.
+Dans le cadre de ce projet, nous avons implémenter la méthode de base qui
+ possède certain incovinients.
+ Nous avons, ensuite, proposer une amélioration pour résoudre le problème
+ du barycentre et d'autres améliorations.
+ Enfin, nous avons expliqué l'approche suivi pour le calibrage des paramètres
+ M et N.
 \end_layout
 
 \end_body

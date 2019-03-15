@@ -8,7 +8,7 @@ fd_db = cell(1);
 for im = 1:numel(img_db_list)
     img_db{im} = logical(imread(img_db_list{im}));
     label_db{im} = get_label(img_db_list{im});
-    [fd_db{im},~,~,~] = compute_fd2(img_db{im});
+    [fd_db{im},~,~,~] = compute_fd(img_db{im});
     % affichage de pourcentage de traitement.
     clc;fprintf("%d%% Terminé\n",round((im/numel(img_db_list))*100));
 end
@@ -28,7 +28,7 @@ for im = 1:numel(img_list)
     
     % calcul du descripteur de Fourier de l'image
     img = logical(imread(img_list{im}));
-    [fd,r,m,poly] = compute_fd2(img);
+    [fd,r,m,poly] = compute_fd(img);
        
     % calcul et tri des scores de distance aux descripteurs de la base
     for i = 1:length(fd_db)
@@ -61,15 +61,69 @@ for im = 1:numel(img_list)
     % calcul de precision pour la class courrente
     accuracy = accuracy/top;
     precision = precision + accuracy;
-    %fprintf("Accuracy(%s) = %f",label, accuracy);
     
     % affichage
-    %drawnow();
-    %waitforbuttonpress();
+    drawnow();
+    waitforbuttonpress();
 end
 
 recall = 0;
 precision = precision/numel(img_list);
-%fprintf("Precision = %f\n",precision);
+fprintf("Précision = %f%%\n",round(precision*100,2));
 close all;
+end
+
+function [fd,r,m,poly] = compute_fd(img)
+N = 512;
+M = 32;
+h = size(img,1);
+w = size(img,2);
+
+[mi, mj] = barycenter(img); % calcul de barycentre
+m = [mi, mj];
+t = linspace(0,2*pi,N); % génération de N angles entre 0 et 2pi
+
+k = 1;
+poly = zeros(N, 2);
+
+for x = 1:N
+    % initialiser les points de depart au barycentre.
+    i = mi; j = mj;
+    poly(k,1) = int32(i); poly(k,2) = int32(j);
+    a = 1;
+    
+    % se déplacer tout au long du rayon courant jusqu'a arriver au
+    % extrimité de l'image. garder toujours le dernier point blanc.
+    while (i<=h && i>0) && (j<=w && j>0)    
+        if img(i,j)==1
+            poly(k,1) = int32(i);
+            poly(k,2) = int32(j);
+        end
+        j = mj + a*cos(t(1,x));
+        i = mi + a*sin(t(1,x));
+        a=a+1;
+    end
+    k = k+1;
+end
+
+r = ((poly(:,1) - mean(poly(:,1))).^2 + (poly(:,2) - mean(poly(:,2))).^2).^(0.5); % vecteur descripteur
+ftr = fft(r); % transformé de fourier de r
+fd = abs(ftr(1:M))/abs(ftr(1));
+end
+
+% methode pour calculer le barycentre
+function [Mi, Mj] = barycenter(img)
+
+% extraction des pixels blancs
+[I, J] = find(img == 1);
+
+% si l'image n'a pas de pixels blanc le barycentre est le centre d'image.
+% sinon c'est la moyenne des coordonnées des points blancs.
+if size(I,1) == 0 ||  size(I,2) == 0
+    Mi = size(img,1)/2;
+    Mj = size(img,2)/2;
+else
+    Mi = int32(mean(I));
+    Mj = int32(mean(J));
+end
 end
